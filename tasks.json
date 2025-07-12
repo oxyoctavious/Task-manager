@@ -1,6 +1,16 @@
 [
     {
         "title": "push this project to git",
+        "done": false,
+        "completed": true
+    },
+    {
+        "title": "drink water",
         "done": false
+    },
+    {
+        "title": "sleep",
+        "done": false,
+        "completed": true
     }
 ]

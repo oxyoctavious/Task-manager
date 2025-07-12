@@ -35,8 +35,8 @@ def main():
         print("\nTask Manager")
         print("1. View Tasks")
         print("2. Add Task")
-        
-        print("3. Exit")
+        print("3. Mark task as completed")
+        print("4. Exit")
         
         
         choice = input("Choose an option: ")
@@ -47,6 +47,21 @@ def main():
             tasks.append({"title": title, "done": False})
             save_tasks(tasks)
         elif choice == "3":
+            show_tasks
+            if not tasks:
+                continue      
+            try:
+                task_num = int(input("Enter task number to mark as complete: "))
+                if 1<= task_num <= len(tasks):
+                    tasks[task_num - 1] ["completed"] = True
+                    save_tasks (tasks)
+                    print("task Marked as complete")
+                else:
+                    print("Invalid task number")
+            except ValueError:
+                print("please enter a valid number")                   
+        elif choice == "4" :
+            print("Good Bye")
             break
         else:
             print("Invalid choice.")
