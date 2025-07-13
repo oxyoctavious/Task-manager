@@ -1,6 +1,14 @@
 [
     {
-        "title": "go to shop",
+        "title": "complete the project",
+        "completed": false
+    },
+    {
+        "title": "fix the colorama error",
+        "completed": false
+    },
+    {
+        "title": "also fix the task sorting ",
         "completed": false
     }
 ]
