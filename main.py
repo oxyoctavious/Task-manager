@@ -1,6 +1,7 @@
 import json
 import os
-
+from colorama import init, Fore, Style
+init(autoreset=True)
 
 TASK_FILE = "tasks.json"
 
@@ -17,7 +18,7 @@ def save_tasks(tasks):
     with open(TASK_FILE, "w") as file:
         json.dump(tasks, file, indent=4)
         
-        
+    tasks =sorted(tasks, key=lambda x: x.get("completed", False))    
 def show_tasks(tasks):
     """Display all tasks. 
     
@@ -28,12 +29,22 @@ def show_tasks(tasks):
     - ❌ Not Done if the task is still pending
     """
     if not tasks:
-        print("No tasks available.")
+        print( Fore.YELLOW + "No tasks available.")
         return   
-    print("\n Your Tasks:")
+    task = sorted(tasks, key=lambda x: x.get("completed", False))
+
+    total= len(tasks)
+    completed = sum(1 for t in tasks if t["completed"])
+    pending = total - completed
+    print(Fore.CYAN + "\n Your Tasks: ")
+    print(Fore.MAGENTA + f"Total: {total} | ✅ Done: {completed} |  ❌ Pending: {pending}\n")
+        
+    
     for idx, task in enumerate(tasks, start=1):
-        status = "✅ Done" if task["completed"] else "❌Not Done"
-        print(f"{idx}. [{status}] {task['title']}")
+        status = Fore.GREEN + "✅ Done" if task["completed"] else (Fore.BLUE + "❌ Not Done")
+        title = Style.DIM + task['title'] if task["completed"] else Fore.YELLOW + task['title']
+        print(f"{idx}. [{status}] {title}")
+        
         
         # Main menu Loop
 def main():
@@ -79,7 +90,7 @@ def main():
             if not tasks:
                 continue
             try:
-                task_num = int(input("Enter task number to mark as complete"))
+                task_num = int(input("Enter task number to Delete: "))
                 if 1<= task_num <= len(tasks):
                     delete_tasks = tasks.pop (task_num-1)  
                     save_tasks(tasks)
