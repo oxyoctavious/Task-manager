@@ -37,13 +37,13 @@ def show_tasks(tasks):
     completed = sum(1 for t in tasks if t["completed"])
     pending = total - completed
     print(Fore.CYAN + "\n Your Tasks: ")
-    print(Fore.MAGENTA + f"Total: {total} | ✅ Done: {completed} |  ❌ Pending: {pending}\n")
-        
+    
     
     for idx, task in enumerate(tasks, start=1):
-        status = Fore.GREEN + "✅ Done" if task["completed"] else (Fore.BLUE + "❌ Not Done")
+        status = (Fore.GREEN + "✅ Done") if task["completed"] else (Fore.BLUE + "❌ Not Done")
         title = Style.DIM + task['title'] if task["completed"] else Fore.YELLOW + task['title']
         print(f"{idx}. [{status}] {title}")
+       
         
         
         # Main menu Loop
